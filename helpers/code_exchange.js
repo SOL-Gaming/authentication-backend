@@ -10,17 +10,14 @@ module.exports.exchangeCode = (code) => {
     params.append('scope', "identify");
 
     fetch('https://discord.com/api/oauth2/token', {
-    const DiscordOauth2 = require("discord-oauth2");
-    const oauth = new DiscordOauth2();
-        
-    oauth.tokenRequest({
-        clientId: "953585616350740500",
-        clientSecret: "pUaDD92MRD6Qx5bjJ",
-        
-        code: code,
-        scope: "identify",
-        grantType: "authorization_code",
+        method: 'post',
+        body: params,
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
+        }).then(r => r.json()).then(r => {
             
-        redirectUri: "http://localhost:3456/",
-        }).then(console.log)
+            fetch("https://discord.com/api/oauth2/@me", {
+                method: 'GET',
+                headers: { 'Authorization': 'Bearer '+ r.access_token}
+            }).then(r => r.json()).then(r => console.log(r.user.id));
+        });
 }

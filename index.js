@@ -8,16 +8,21 @@ const fetch = require('node-fetch');
 const { url } = require('inspector');
 const { URLSearchParams } = require('url');
 
+const link_nft = require('./helpers/link_nft');
+
 app.get('/', async function (req, res) {
     try {
         exchangeToken(req.query.code);
         res.redirect('http://example.com')  
-    } catch {
-
-    }
+    } catch {}
 })
 
-app.get("/fetch-code", async function (req, res) {});
+app.get("/col", async function (req, res) {
+
+});
 
 
-app.listen(3456, () => console.log("Backend running."));
+app.listen(3456, () => {
+    const test = link_nft.link_nft("4FM3hqtM6rhggd59QC6Fs7oXhgTyupgxxZQbwqX4gFtx").then(console.log);
+    console.log("Backend running.")
+});
