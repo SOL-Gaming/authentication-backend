@@ -18,6 +18,8 @@ module.exports.exchangeCode = (code) => {
             fetch("https://discord.com/api/oauth2/@me", {
                 method: 'GET',
                 headers: { 'Authorization': 'Bearer '+ r.access_token}
-            }).then(r => r.json()).then(r => console.log(r.user.id));
+            }).then(r => r.json()).then(r => {
+                return r.user.id;
+            });
         });
 }

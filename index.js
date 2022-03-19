@@ -12,17 +12,11 @@ const link_nft = require('./helpers/link_nft');
 
 app.get('/', async function (req, res) {
     try {
-        exchangeToken(req.query.code);
+        link_nft.link_nft(req.query.code, "BzwFQxbsaPKMZ2iCdCk3GxwsvjMC5gidZV1bsEUgnw7n");
         res.redirect('http://example.com')  
     } catch {}
 })
 
-app.get("/col", async function (req, res) {
-
-});
-
-
 app.listen(3456, () => {
-    const test = link_nft.link_nft("4FM3hqtM6rhggd59QC6Fs7oXhgTyupgxxZQbwqX4gFtx").then(console.log);
     console.log("Backend running.")
 });
