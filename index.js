@@ -1,3 +1,4 @@
+Error.stackTraceLimit = Infinity;
 const express = require('express');
 const axios = require('axios');
 const app = express();
@@ -10,11 +11,13 @@ const { URLSearchParams } = require('url');
 
 const link_nft = require('./helpers/link_nft');
 
-app.get('/', async function (req, res) {
+app.get('/', async (req, res) => {
     try {
-        link_nft.link_nft(req.query.code, "BzwFQxbsaPKMZ2iCdCk3GxwsvjMC5gidZV1bsEUgnw7n");
+        await link_nft.link_nft(req.query.code, req.query.state);
         res.redirect('http://example.com')  
-    } catch {}
+    } catch(e) {
+        console.log(e);
+    }
 })
 
 app.listen(3456, () => {
